@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { navLinks, site } from '@/content/data'
 
 export default function Nav() {
@@ -23,13 +24,13 @@ export default function Nav() {
     <>
       <nav className={`nav${scrolled ? ' scrolled' : ''}`} role="navigation">
         <div className="nav-inner">
-          <a href="#inicio" className="nav-logo" onClick={close}>
+          <Link href="/" className="nav-logo" onClick={close}>
             {site.name}
-          </a>
+          </Link>
           <ul className="nav-links">
             {navLinks.map(l => (
               <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
+                <Link href={l.href}>{l.label}</Link>
               </li>
             ))}
             <li>
@@ -39,7 +40,7 @@ export default function Nav() {
           <button
             className={`nav-hamburger${open ? ' open' : ''}`}
             onClick={() => setOpen(v => !v)}
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={open ? 'Cerrar menu' : 'Abrir menu'}
             aria-expanded={open}
           >
             <span />
@@ -53,13 +54,13 @@ export default function Nav() {
         className={`nav-mobile-overlay${open ? ' open' : ''}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Menú de navegación"
+        aria-label="Menu de navegacion"
         onClick={e => { if (e.target === e.currentTarget) close() }}
       >
         {navLinks.map(l => (
-          <a key={l.href} href={l.href} onClick={close}>
+          <Link key={l.href} href={l.href} onClick={close}>
             {l.label}
-          </a>
+          </Link>
         ))}
         <p className="nav-mobile-contact">{site.email}</p>
       </div>

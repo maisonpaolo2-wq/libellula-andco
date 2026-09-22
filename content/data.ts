@@ -13,10 +13,10 @@ export const site = {
 }
 
 export const navLinks = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Nosotras', href: '#nosotras' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Nosotras', href: '/nosotras' },
+  { label: 'Contacto', href: '/contacto' },
 ]
 
 export const services = [

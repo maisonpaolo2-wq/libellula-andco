@@ -1,52 +1,137 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Reveal from '@/components/Reveal'
 import Gallery from '@/components/Gallery'
 import Testimonials from '@/components/Testimonials'
 import ContactForm from '@/components/ContactForm'
 import { services, process, portfolio, about, site } from '@/content/data'
 
+const MARQUEE_ITEMS = [
+  'Alquiler de mobiliario',
+  'Decoracion de eventos',
+  'Wedding Styling',
+  'Bodas en Tenerife',
+  'Eventos exclusivos',
+  'Menaje seleccionado',
+]
+
+function DragonflySVG({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 160 80"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="0.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <line x1="80" y1="10" x2="80" y2="70" />
+      <circle cx="80" cy="8" r="4" />
+      <ellipse cx="80" cy="27" rx="6" ry="4" />
+      <path d="M80 24 C54 14, 16 8, 10 26 C16 40, 54 36, 80 30" />
+      <path d="M80 24 C106 14, 144 8, 150 26 C144 40, 106 36, 80 30" />
+      <path d="M80 34 C52 26, 12 30, 10 44 C16 56, 54 50, 80 42" />
+      <path d="M80 34 C108 26, 148 30, 150 44 C144 56, 106 50, 80 42" />
+    </svg>
+  )
+}
+
 export default function Home() {
   return (
     <main>
 
-      {/* ── Hero ──────────────────────────────────────────────── */}
-      <section className="hero" id="inicio" aria-label="Portada">
-        <div className="hero-bg">
-          <Image
-            src="/photos/hero.jpg"
-            alt="Boda elegante en Tenerife con decoracion de Libellula and Co"
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
-          />
-        </div>
-        <div className="hero-overlay" aria-hidden="true" />
-        <div className="hero-content wrap--wide">
-          <h1 className="display">
-            Cada espacio,<br />una historia
-          </h1>
-          <p className="hero-sub">
-            Alquiler de mobiliario, decoracion y wedding styling en Tenerife.
-          </p>
-          <div className="hero-actions">
-            <a href="#contacto" className="btn btn-gold">Pedir informacion</a>
-            <a href="#portfolio" className="btn btn-outline-white">Ver portfolio</a>
+      {/* ── Hero editorial split ──────────────────────────────── */}
+      <section className="hero-split" id="inicio" aria-label="Portada">
+
+        <div className="hero-split-left">
+          <DragonflySVG className="hero-dragonfly" />
+
+          <div>
+            <p style={{
+              fontSize: '0.72rem',
+              fontWeight: 500,
+              letterSpacing: '0.14em',
+              color: 'rgba(255,255,255,0.35)',
+              marginBottom: '1.75rem',
+            }}>
+              Tenerife, Islas Canarias
+            </p>
+            <h1 className="hero-split-display">
+              Cada espacio,<br />una historia
+            </h1>
+            <p className="hero-split-sub">
+              Alquiler de mobiliario, decoracion y wedding styling para eventos
+              que se recuerdan toda la vida.
+            </p>
+            <div className="hero-split-actions">
+              <Link href="/contacto" className="btn btn-gold">Pedir informacion</Link>
+              <Link href="/portfolio" className="btn btn-outline-white">Ver portfolio</Link>
+            </div>
           </div>
         </div>
-        <div className="hero-scroll" aria-hidden="true">
-          <div className="hero-scroll-line" />
+
+        <div className="hero-split-right" aria-hidden="true">
+          <div className="hero-photo-a">
+            <Image
+              src="/photos/hero-a.jpg"
+              alt="Boda elegante en Tenerife"
+              fill
+              priority
+              sizes="(max-width: 860px) 58vw, 30vw"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          <div className="hero-photo-b">
+            <Image
+              src="/photos/hero-b.jpg"
+              alt="Decoracion floral para boda en Tenerife"
+              fill
+              sizes="(max-width: 860px) 42vw, 24vw"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
         </div>
+
       </section>
 
-      {/* ── Intro strip ───────────────────────────────────────── */}
-      <section className="intro" aria-label="Presentacion">
-        <div className="intro-inner">
-          <p className="intro-text">
-            Transformamos espacios en experiencias que se recuerdan toda la vida.
-          </p>
-          <div className="intro-divider" aria-hidden="true" />
-          <span className="intro-location">Tenerife, Islas Canarias</span>
+      {/* ── Marquee strip ─────────────────────────────────────── */}
+      <div className="marquee-strip" aria-hidden="true">
+        <div className="marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span key={i} className="marquee-item">
+              <span className="marquee-text">{item}</span>
+              <span className="marquee-dot" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Intro + stats ─────────────────────────────────────── */}
+      <section className="intro-redesign" aria-label="Presentacion">
+        <div className="intro-redesign-inner">
+          <Reveal>
+            <p className="intro-pull">
+              Transformamos cualquier espacio en una experiencia{' '}
+              <em>que se recuerda</em>.
+            </p>
+          </Reveal>
+          <Reveal delay={1}>
+            <div className="stats-row" role="list">
+              {[
+                { n: '+80', label: 'eventos realizados' },
+                { n: '5+',  label: 'anos de experiencia' },
+                { n: '100%', label: 'satisfaccion' },
+                { n: 'TFS', label: 'con base en Tenerife' },
+              ].map(s => (
+                <div key={s.label} className="stat-item" role="listitem">
+                  <p className="stat-number">{s.n}</p>
+                  <p className="stat-label">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -56,7 +141,7 @@ export default function Home() {
           <Reveal>
             <div className="services-header">
               <span className="section-tag">Servicios</span>
-              <h2 className="headline text-blue">Lo que hacemos</h2>
+              <h2 className="headline text-blue" id="servicios-heading">Lo que hacemos</h2>
             </div>
           </Reveal>
           <div className="services-list" role="list">
@@ -68,11 +153,16 @@ export default function Home() {
                     <h3 className="service-name">{s.name}</h3>
                     <p className="service-desc">{s.description}</p>
                   </div>
-                  <a href="#contacto" className="service-cta">Consultar</a>
+                  <Link href="/servicios" className="service-cta">Ver detalle</Link>
                 </article>
               </Reveal>
             ))}
           </div>
+          <Reveal delay={2}>
+            <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+              <Link href="/servicios" className="btn btn-outline-blue">Todos los servicios</Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -109,6 +199,11 @@ export default function Home() {
             </div>
           </Reveal>
           <Gallery images={portfolio} />
+          <Reveal>
+            <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+              <Link href="/portfolio" className="btn btn-outline-blue">Ver portfolio completo</Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -136,9 +231,12 @@ export default function Home() {
                   <p key={i} className="body-text">{p}</p>
                 ))}
                 <p className="about-signature">Libellula and Co</p>
-                <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-blue mt-lg" style={{ display: 'inline-flex', marginTop: '2rem' }}>
-                  Ver Instagram
-                </a>
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+                  <Link href="/nosotras" className="btn btn-outline-blue">Conocenos mejor</Link>
+                  <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline-blue">
+                    Instagram
+                  </a>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -171,7 +269,7 @@ export default function Home() {
                   Hablemos de tu evento
                 </h2>
                 <p className="body-text">
-                  Cuentanos tu idea, la fecha y el lugar. Te respondemos en menos de 24 horas con presupuesto personalizado.
+                  Cuentanos tu idea, la fecha y el lugar. Te respondemos en menos de 24 horas con un presupuesto personalizado.
                 </p>
                 <div className="contact-data">
                   <div className="contact-data-item">
@@ -187,12 +285,6 @@ export default function Home() {
                   <div className="contact-data-item">
                     <span className="contact-data-label">Ubicacion</span>
                     <span>{site.location}</span>
-                  </div>
-                  <div className="contact-data-item">
-                    <span className="contact-data-label">Instagram</span>
-                    <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener noreferrer">
-                      @{site.instagram}
-                    </a>
                   </div>
                 </div>
               </div>
