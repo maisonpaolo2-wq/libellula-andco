@@ -22,7 +22,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={`nav${scrolled ? ' scrolled' : ''}`} role="navigation">
+      <nav className={`nav${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}`} role="navigation">
         <div className="nav-inner">
           <Link href="/" className="nav-logo" onClick={close}>
             {site.name}

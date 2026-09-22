@@ -73,40 +73,36 @@ export default function ServiciosPage() {
           {services.map((s, i) => {
             const detail = serviceDetails.find(d => d.id === s.id)
             return (
-              <div key={s.id}>
-                <div className="service-detail">
-                  <Reveal>
-                    <div className="service-detail-photo">
-                      <Image
-                        src={s.photo}
-                        alt={s.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                  </Reveal>
-                  <Reveal delay={1}>
-                    <div className="service-detail-content">
-                      <span className="section-tag">0{i + 1}</span>
-                      <h2 className="service-detail-name">{s.name}</h2>
-                      <p className="service-detail-desc">{s.description}</p>
-                      <p className="service-detail-desc" style={{ marginTop: '0.75rem' }}>{s.detail}</p>
-                      {detail && (
-                        <ul className="service-detail-list">
-                          {detail.included.map(item => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      )}
-                      <Link href="/contacto" className="btn btn-primary">
-                        Consultar disponibilidad
-                      </Link>
-                    </div>
-                  </Reveal>
+              <Reveal key={s.id}>
+                <div className={`service-detail${i % 2 === 1 ? ' reverse' : ''}`}>
+                  <div className="service-detail-photo">
+                    <Image
+                      src={s.photo}
+                      alt={s.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div className="service-detail-content">
+                    <span className="section-tag">0{i + 1}</span>
+                    <h2 className="service-detail-name">{s.name}</h2>
+                    <p className="service-detail-desc">{s.description}</p>
+                    <p className="service-detail-desc" style={{ marginTop: '0.75rem' }}>{s.detail}</p>
+                    {detail && (
+                      <ul className="service-detail-list">
+                        {detail.included.map(item => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                    <Link href="/contacto" className="btn btn-primary">
+                      Consultar disponibilidad
+                    </Link>
+                  </div>
                 </div>
                 {i < services.length - 1 && <hr className="service-divider" />}
-              </div>
+              </Reveal>
             )
           })}
         </div>

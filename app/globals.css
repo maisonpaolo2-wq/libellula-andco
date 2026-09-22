@@ -201,7 +201,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-logo {
@@ -220,16 +220,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   list-style: none;
+  flex-shrink: 0;
 }
 
 .nav-links a {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: rgba(255,255,255,0.85);
   letter-spacing: 0.03em;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 
 .nav-links a:hover { color: var(--white); }
@@ -271,6 +273,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .nav.scrolled .nav-hamburger span { background: var(--blue-ink); }
+
+.nav.menu-open { background: var(--blue-ink) !important; backdrop-filter: none; box-shadow: none; }
+.nav.menu-open .nav-logo { color: var(--white) !important; }
+.nav.menu-open .nav-hamburger span { background: var(--white) !important; }
 
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
@@ -320,7 +326,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   letter-spacing: 0.04em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
   .nav-links { display: none; }
   .nav-lang  { display: none; }
   .nav-hamburger { display: flex; }
@@ -490,7 +496,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-family: var(--font-display);
   font-weight: 300;
   font-size: 3.5rem;
-  color: var(--blue-pale);
+  color: var(--blue-mid);
+  opacity: 0.35;
   line-height: 1;
   padding-top: 0.25rem;
 }
@@ -1000,6 +1007,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   box-shadow: 0 6px 24px rgba(0,0,0,0.25);
 }
 
+@media (max-width: 600px) {
+  .whatsapp-fab { bottom: 1.25rem; right: 1.25rem; width: 48px; height: 48px; }
+  .whatsapp-fab svg { width: 24px; height: 24px; }
+}
+
 /* ── Gallery / Lightbox ──────────────────────────────────── */
 
 .gallery-grid {
@@ -1205,9 +1217,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
   overflow: hidden;
   display: flex;
-  gap: 8px;
-  padding: 8px;
-  background: var(--mist);
+  gap: 6px;
+  padding: 0;
+  background: var(--snow);
 }
 
 .hero-photo-a {
@@ -1459,8 +1471,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding-block: 5rem;
 }
 
-.service-detail:nth-child(even) .service-detail-photo { order: 1; }
-.service-detail:nth-child(even) .service-detail-content { order: 0; }
+.service-detail.reverse .service-detail-photo { order: 1; }
+.service-detail.reverse .service-detail-content { order: 0; }
 
 .service-detail-photo {
   position: relative;
@@ -1530,8 +1542,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  .service-detail:nth-child(even) .service-detail-photo { order: 0; }
-  .service-detail:nth-child(even) .service-detail-content { order: 1; }
+  .service-detail.reverse .service-detail-photo { order: 0; }
+  .service-detail.reverse .service-detail-content { order: 1; }
 }
 
 /* ── Portfolio page ──────────────────────────────────────── */

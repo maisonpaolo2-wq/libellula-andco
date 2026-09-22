@@ -30,9 +30,7 @@ export default function PortfolioPage() {
 
       <section className="section" aria-label="Galeria de proyectos">
         <div className="wrap--wide">
-          <Reveal>
-            <Gallery images={portfolio} />
-          </Reveal>
+          <Gallery images={portfolio} />
         </div>
       </section>
 
